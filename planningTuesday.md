@@ -53,3 +53,13 @@ https://miro.com/welcomeonboard/cXRVcmV3eDJYekJQYjdwdGczQXZGY3d6ODZZNGpjZ3MwTFRq
 ## Working mvp hypothesis
 
 1 user, 1 friend, 1 task, 1 day and a manual tracking, say a glass of water
+
+Stretch MVP
+
+More than 1 person in the tribe
+
+## Revised MVP after meeting with John
+
+Database -> Python -> React Native 
+
+Plugged in and working

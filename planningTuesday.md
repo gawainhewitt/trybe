@@ -49,3 +49,7 @@ There are different types of goals
 ## Miro board
 
 https://miro.com/welcomeonboard/cXRVcmV3eDJYekJQYjdwdGczQXZGY3d6ODZZNGpjZ3MwTFRqeXdnSXZmeGRydzJWWDlvUG9UNXpZTkJZeldLSXwzNDU4NzY0NTIzNzIzOTE3ODMx?share_link_id=228379319422
+
+## Working mvp hypothesis
+
+1 user, 1 friend, 1 task, 1 day and a manual tracking, say a glass of water

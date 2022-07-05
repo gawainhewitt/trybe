@@ -44,3 +44,8 @@ Trybot chips in with resources for change making.
 ## Documentation
 
 There are different types of goals
+
+
+## Miro board
+
+https://miro.com/welcomeonboard/cXRVcmV3eDJYekJQYjdwdGczQXZGY3d6ODZZNGpjZ3MwTFRqeXdnSXZmeGRydzJWWDlvUG9UNXpZTkJZeldLSXwzNDU4NzY0NTIzNzIzOTE3ODMx?share_link_id=228379319422

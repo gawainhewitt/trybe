@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 export default function App() {
@@ -38,7 +38,15 @@ export default function App() {
               value={text}
             />  
 
-            <Text style={{flex: 1}}>This Will Be A Button</Text>
+            <Button
+              title="Press me"
+              onPress={() => {
+                postData('https://crudapi.co.uk/api/v1/task', { "id": 4, "title": `${text}` })
+                .then(data => {
+                  console.log(data); // JSON data parsed by `data.json()` call
+                });
+              }}
+            />
 
           </View>
 
@@ -52,7 +60,10 @@ export default function App() {
               keyboardType="numeric"
             />
 
-            <Text style={{flex: 1}}>This Will Be A Button</Text>
+            <Button
+              title="Press me"
+              onPress={() => Alert.alert(`${number}`)}
+            />
 
           </View>
             
@@ -103,7 +114,7 @@ const styles = StyleSheet.create({
   },
   title: { 
     fontSize: 50, 
-    color: 'green', 
+    color: 'white', 
     textAlign: 'center', 
     paddingBottom: 10, 
     margin: 0
@@ -116,3 +127,19 @@ const styles = StyleSheet.create({
     flex: 2
   },
 });
+
+
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer Ik6xAoSAFlV2hdJHN8-BRWmUSysRJok2OISCA9ImxYwVJ1fUpQ'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify([data])
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}

@@ -1,16 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import Title from './src/components/Title.component';
+import NewGoal from './src/components/NewGoal.component';
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   console.log(data);
-  const [text, onChangeText] = React.useState("Enter Goal");
   const [number, onChangeNumber] = React.useState(null);
 
   useEffect(() => {
-    fetch('https://crudapi.co.uk/api/v1/task', {headers: {'Authorization': 'Bearer Ik6xAoSAFlV2hdJHN8-BRWmUSysRJok2OISCA9ImxYwVJ1fUpQ'}})
+    fetch('https://trybe-backend.herokuapp.com/goals')
     .then((Response) => Response.json())
     .then((json) => setData(json))
     .catch((error) => console.error(error))
@@ -22,60 +23,17 @@ export default function App() {
       {isLoading ? <Text>Loading...</Text> :
       ( <SafeAreaView style={styles.container}>
         
-          <View style={styles.box1}>
+          <Title/>
 
-            <Text style={styles.title}>TryBe</Text>
-
-          </View>
-
-          <View style={styles.box2}>
-
-          <View style={styles.innerBox2}>
-
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeText}
-              value={text}
-            />  
-
-            <Button
-              title="Press me"
-              onPress={() => {
-                postData('https://crudapi.co.uk/api/v1/task', { "id": 4, "title": `${text}` })
-                .then(data => {
-                  console.log(data); // JSON data parsed by `data.json()` call
-                });
-              }}
-            />
-
-          </View>
-
-          <View style={styles.innerBox2}>
-
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeNumber}
-              value={number}
-              placeholder="number to achieve"
-              keyboardType="numeric"
-            />
-
-            <Button
-              title="Press me"
-              onPress={() => Alert.alert(`${number}`)}
-            />
-
-          </View>
-            
-          </View>
+          <NewGoal/>
           
           <View style={styles.box3}>
 
           <FlatList
-                data={data.items}
+                data={data}
                 keyExtractor={({ id }, index) => id}
                 renderItem={({ item }) => (
-                      <Text>{item.id + '. ' + item.title}</Text>
+                      <Text>{item.id + '. ' + item.goal_description}</Text>
             )}/>
 
           </View>
@@ -86,6 +44,7 @@ export default function App() {
       
     );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -129,17 +88,3 @@ const styles = StyleSheet.create({
 });
 
 
-async function postData(url = '', data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer Ik6xAoSAFlV2hdJHN8-BRWmUSysRJok2OISCA9ImxYwVJ1fUpQ'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: JSON.stringify([data])
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-}

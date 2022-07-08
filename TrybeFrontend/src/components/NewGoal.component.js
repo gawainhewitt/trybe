@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Keyboard, TextInput, Button, View } from "react-native";
 import styles from "./NewGoal.component.style";
-import postGoals from "../functions/postGoals";
 import { uploadGoal } from "../../store/goals/goals.actions";
 import { useDispatch } from "react-redux";
 
@@ -24,7 +23,7 @@ function NewGoal() {
       <Button
         style={styles.wrapper}
         title="Create Goal"
-        onPress={async () => {
+        onPress={() => {
           dispatch(uploadGoal(text));
           onChangeText("");
           Keyboard.dismiss();

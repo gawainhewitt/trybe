@@ -1,13 +1,23 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View, Text } from "react-native";
+import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
+import { removeGoal } from "../../store/goals/goals.actions";
+import { useDispatch } from "react-redux";
 
 function Goal(props) {
   const data = props.route.params.data;
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.viewStyle}>
       {/* <Text style={styles.text}>{data.goal_description}</Text> */}
       <Text style={styles.text}>{data.title}</Text>
+      <Button
+        title="Delete Goal"
+        onPress={() => {
+          dispatch(removeGoal(data._uuid));
+          props.navigation.navigate("GoalsHome");
+        }}
+      />
     </SafeAreaView>
   );
 }

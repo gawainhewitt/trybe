@@ -6,7 +6,8 @@ function Goal(props) {
 
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <Text style={styles.text}>{data.goal_description}</Text>
+      {/* <Text style={styles.text}>{data.goal_description}</Text> */}
+      <Text style={styles.text}>{data.title}</Text>
     </SafeAreaView>
   );
 }

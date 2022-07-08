@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
-import fetchGoals from "../functions/fetchGoals";
 import { loadGoals } from "../../store/goals/goals.actions";
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from "react-redux";
 
 function ViewGoals(props) {
-  console.log("how many times being called?");
+  const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  let goals = useSelector(state => state.goals);
+  let goals = useSelector((state) => state.goals);
 
   useEffect(() => {
     async function load() {
-      console.log('in useEffect');
       await dispatch(loadGoals());
+      setLoading(false);
     }
-    load()
+    load();
   }, [dispatch]);
 
   const clickedItem = (data) => {
@@ -27,19 +25,19 @@ function ViewGoals(props) {
 
   return (
     <View style={styles.wrapper}>
-      {/* {isLoading ? (
+      {isLoading ? (
         <Text>Loading...</Text>
-      ) : ( */}
+      ) : (
         <FlatList
           data={goals}
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={({ _uuid }, index) => _uuid} // changed from id to uuid for test api
           renderItem={({ item }) => (
             <Text style={styles.goal} onPress={() => clickedItem(item)}>
               {item.id + ". " + item.title}
             </Text>
           )}
         />
-      {/* )} */}
+      )}
     </View>
   );
 

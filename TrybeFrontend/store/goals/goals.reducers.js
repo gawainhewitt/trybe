@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadGoals } from './goals.actions';
+import { loadGoals, uploadGoal } from './goals.actions';
 
 const initialState = [];
 
@@ -9,9 +9,13 @@ const goalSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      // Load peeps success
+      // Load goals success
       .addCase(loadGoals.fulfilled, (state, action) => {
         return state = action.payload;
+      })
+      // Upload goal success
+      .addCase(uploadGoal.fulfilled, (state, action) => {
+        state.push(action.payload.items[0]);
       })
     }
 });

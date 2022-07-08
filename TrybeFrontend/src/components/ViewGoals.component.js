@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
+import fetchGoals from "../functions/fetchGoals";
+import { loadGoals } from "../../store/goals/goals.actions";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function ViewGoals(props) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  let goals = useSelector(state => state.goals);
 
   useEffect(() => {
-    fetch("https://trybe-backend.herokuapp.com/goals")
-      .then((Response) => Response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, [props]);
+    async function load() {
+      await dispatch(loadGoals());
+      setLoading(false)
+    }
+    load()
+  }, [goals, dispatch]);
 
   const clickedItem = (data) => {
     props.navigation.navigate("Goal", { data: data });
@@ -24,7 +30,7 @@ function ViewGoals(props) {
         <Text>Loading...</Text>
       ) : (
         <FlatList
-          data={data}
+          data={goals}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
             <Text style={styles.goal} onPress={() => clickedItem(item)}>

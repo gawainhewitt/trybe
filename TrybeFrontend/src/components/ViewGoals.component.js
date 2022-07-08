@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
+import fetchGoals from "../functions/fetchGoals";
 
 function ViewGoals(props) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://trybe-backend.herokuapp.com/goals")
-      .then((Response) => Response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+    const getGoals = async () => { 
+      await fetchGoals();
+      setLoading(false)
+    }
+    getGoals();
   }, [props]);
 
   const clickedItem = (data) => {

@@ -1,31 +1,27 @@
-import React from 'react';
-import { TextInput, Button, View } from 'react-native';
-import styles from './NewGoal.component.style';
-import postData from '../functions/postData';
+import React, { useState } from "react";
+import { TextInput, Button, View } from "react-native";
+import styles from "./NewGoal.component.style";
+import postData from "../functions/postData";
 
 function NewGoal() {
-  const [text, onChangeText] = React.useState("Enter Goal");
+  const [text, onChangeText] = useState("");
 
-    return(
-      <View style={styles.box2}>
+  return (
+    <View style={styles.wrapper}>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Goal"
+        onChangeText={onChangeText}
+        value={text}
+      />
 
-        <View style={styles.innerBox2}>
-
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-          />  
-
-          <Button
-            title="Press me"
-            onPress={() => postData(text)}
-          />
-
-        </View>
-        
-      </View>
-    );
+      <Button
+        style={styles.wrapper}
+        title="Create Goal"
+        onPress={() => postData(text)}
+      />
+    </View>
+  );
 }
 
 export default NewGoal;

@@ -1,10 +1,14 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  box3: {
-		flex: 1, 
-		backgroundColor: "lightgreen" , 
-		flexDirection: 'column'
-	}
+  goal: {
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#bbb",
+    borderRadius: 5,
+    marginBottom: 12,
+  },
+  wrapper: {
+    padding: 20,
+  },
 });

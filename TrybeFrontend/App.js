@@ -1,26 +1,22 @@
-import { SafeAreaView } from 'react-native';
-import React from 'react';
-import Title from './src/components/Title.component';
-import NewGoal from './src/components/NewGoal.component';
-import ViewGoals from './src/components/ViewGoals.component';
-import styles from './src/components/Container.component.style'
+import React from "react";
+import Goals from "./src/screens/Goals";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
-  
+const Tab = createBottomTabNavigator();
+
+function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      
-      <Title/>
+    <Tab.Navigator>
+      <Tab.Screen name="Goals" component={Goals} />
+    </Tab.Navigator>
+  );
+}
 
-      <NewGoal/>
-      
-      <ViewGoals/>
-
-    </SafeAreaView>  
-      
-    );
+export default () => {
+  return (
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  );
 };
-
-
-
-

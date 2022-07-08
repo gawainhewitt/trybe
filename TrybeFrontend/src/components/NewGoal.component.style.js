@@ -1,20 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  box2: { 
-    flex: 2, 
-    backgroundColor: "darkorange" 
-  },
-  innerBox2: {
-    flex: 1, 
-    backgroundColor: "lightblue" , 
-    flexDirection: 'row'
-  },
   input: {
-    height: 40,
-    margin: 12,
+    marginBottom: 12,
     borderWidth: 1,
-    padding: 10,
-    flex: 2
-  }
+    borderColor: "#bbb",
+    borderRadius: 5,
+    paddingHorizontal: 14,
+    backgroundColor: "white",
+  },
+  wrapper: {
+    backgroundColor: "lightgrey",
+    padding: 20,
+  },
 });

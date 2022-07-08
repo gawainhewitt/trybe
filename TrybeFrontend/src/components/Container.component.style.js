@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1, 
-    flexDirection: 'column'
-  }
+    flex: 1,
+    backgroundColor: "#F9FBFC",
+  },
 });

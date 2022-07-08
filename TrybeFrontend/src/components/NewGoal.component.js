@@ -11,9 +11,9 @@ function NewGoal() {
   return (
     <View style={styles.wrapper}>
       <TextInput
-        ref={(input) => {
-          textInput = input;
-        }}
+        // ref={(input) => {
+        //   textInput = input;
+        // }}
         style={styles.input}
         placeholder="Enter Goal"
         onChangeText={onChangeText}

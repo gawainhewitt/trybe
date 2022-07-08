@@ -1,10 +1,20 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-import { removeGoal } from "../../store/goals/goals.actions";
+import React, { useState } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Button,
+  TextInput,
+  View,
+  Keyboard,
+} from "react-native";
+import { editGoal } from "../../store/goals/goals.actions";
 import { useDispatch } from "react-redux";
 
 function Goal(props) {
   const data = props.route.params.data;
+  const [shouldShow, setShouldShow] = useState(false);
+  const [text, onChangeText] = useState(data.title);
   const dispatch = useDispatch();
 
   return (
@@ -18,6 +28,21 @@ function Goal(props) {
           props.navigation.navigate("GoalsHome");
         }}
       />
+      <Button title="Update Goal" onPress={() => setShouldShow(!shouldShow)} />
+
+      {shouldShow ? (
+        <View>
+          <TextInput value={text} onChangeText={onChangeText} />
+          <Button
+            title="Update"
+            onPress={() => {
+              dispatch(editGoal({ id: data._uuid, text: text }));
+              Keyboard.dismiss();
+              props.navigation.navigate("GoalsHome");
+            }}
+          />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 }

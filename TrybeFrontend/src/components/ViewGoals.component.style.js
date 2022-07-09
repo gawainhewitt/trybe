@@ -11,4 +11,8 @@ export default StyleSheet.create({
   wrapper: {
     padding: 20,
   },
+  cardStyle: {
+    margin: 10,
+    padding: 10,
+  },
 });

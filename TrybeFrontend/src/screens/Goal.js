@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  Button,
-  TextInput,
-  View,
-  Keyboard,
-} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Keyboard } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, TextInput } from "react-native-paper";
 
 function Goal(props) {
   const id = props.route.params.id;
@@ -25,17 +18,15 @@ function Goal(props) {
     <SafeAreaView style={styles.viewStyle}>
       <Text style={styles.text}>{goal.goal_description}</Text>
       <View style={styles.row}>
+        <Button onPress={() => setShouldShow(!shouldShow)}>Update Goal</Button>
         <Button
-          title="Update Goal"
-          onPress={() => setShouldShow(!shouldShow)}
-        />
-        <Button
-          title="Delete Goal"
           onPress={() => {
             dispatch(removeGoal(goal.id));
             props.navigation.navigate("GoalsHome");
           }}
-        />
+        >
+          Delete Goal
+        </Button>
       </View>
 
       {shouldShow ? (
@@ -47,12 +38,15 @@ function Goal(props) {
           />
           <Button
             title="Update"
+            mode="contained"
             onPress={() => {
               dispatch(editGoal({ id: goal.id, goal_description: text }));
               Keyboard.dismiss();
               setShouldShow(!shouldShow);
             }}
-          />
+          >
+            Update
+          </Button>
         </View>
       ) : null}
     </SafeAreaView>

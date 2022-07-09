@@ -19,7 +19,6 @@ const goalSlice = createSlice({
       })
       // Delete goal success
       .addCase(removeGoal.fulfilled, (state, action) => {
-        console.log(action.payload);
         return state.filter((goal) => goal.id !== action.payload.id);
       })
       // Edit goal success

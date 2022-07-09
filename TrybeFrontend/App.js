@@ -1,14 +1,14 @@
 import React from "react";
 import Goals from "./src/screens/Goals";
 import Support from "./src/screens/Support";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from "react-redux";
+import { Provider as StoreProvider } from "react-redux";
+import { Provider as PaperProvider } from "react-native-paper";
 import rootReducer from "./store/rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
-import { Feather } from "@expo/vector-icons";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const store = configureStore({
   reducer: rootReducer,
@@ -17,24 +17,26 @@ const store = configureStore({
 function App() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarStyle: { paddingBottom: 2 },
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === "Goals") {
-            iconName = "target";
-          } else if (route.name === "Support") {
-            iconName = "eye";
-          }
-          return <Feather name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-      })}
+      initialRouteName="Goals"
+      // activeColor="white"
+      // barStyle={{ backgroundColor: "#254441" }}
     >
-      <Tab.Screen name="Goals" component={Goals} />
-      <Tab.Screen name="Support" component={Support} />
+      <Tab.Screen
+        name="Goals"
+        component={Goals}
+        options={{
+          tabBarLabel: "Goals",
+          tabBarIcon: "bullseye-arrow",
+        }}
+      />
+      <Tab.Screen
+        name="Support"
+        component={Support}
+        options={{
+          tabBarLabel: "Support",
+          tabBarIcon: "crowd",
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -42,9 +44,11 @@ function App() {
 export default () => {
   return (
     <NavigationContainer>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <StoreProvider store={store}>
+        <PaperProvider>
+          <App />
+        </PaperProvider>
+      </StoreProvider>
     </NavigationContainer>
   );
 };

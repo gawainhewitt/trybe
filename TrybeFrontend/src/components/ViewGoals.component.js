@@ -3,6 +3,7 @@ import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
 import { loadGoals } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Card } from "react-native-paper";
 
 function ViewGoals(props) {
   const [isLoading, setLoading] = useState(true);
@@ -30,9 +31,11 @@ function ViewGoals(props) {
           data={goals}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
-            <Text style={styles.goal} onPress={() => clickedItem(item.id)}>
-              {item.id + ". " + item.goal_description}
-            </Text>
+            <Card style={styles.cardStyle} onPress={() => clickedItem(item.id)}>
+              <Card.Content>
+                <Text>{item.goal_description}</Text>
+              </Card.Content>
+            </Card>
           )}
         />
       )}

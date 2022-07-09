@@ -1,7 +1,7 @@
 import React from "react";
-import { SafeAreaView, Button } from "react-native";
+import { SafeAreaView } from "react-native";
+import { Appbar } from "react-native-paper";
 
-import Title from "../components/Title.component";
 import NewGoal from "../components/NewGoal.component";
 import ViewGoals from "../components/ViewGoals.component";
 
@@ -10,8 +10,6 @@ import styles from "../components/Container.component.style";
 function GoalsHome(props) {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Title /> */}
-
       <NewGoal />
 
       <ViewGoals navigation={props.navigation} />

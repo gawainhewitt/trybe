@@ -25,8 +25,11 @@ function GoalDetailScreen(props) {
         </Card.Content>
       </Card>
       <View style={styles.row}>
-        <Button onPress={() => setShouldShow(!shouldShow)}>Update Goal</Button>
+        <Button icon="pencil" onPress={() => setShouldShow(!shouldShow)}>
+          Update Goal
+        </Button>
         <Button
+          icon="delete"
           onPress={() => {
             dispatch(removeGoal(goal.id));
             props.navigation.navigate("GoalsScreen");

@@ -1,13 +1,8 @@
 import React, { useContext, useState } from "react";
-import {
-  Button,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+
+import { TextInput, Button } from "react-native-paper";
+
 import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
 
@@ -17,7 +12,7 @@ const LoginScreen = ({ navigation }) => {
   const { login } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Logo />
       <View style={styles.wrapper}>
         <TextInput
@@ -36,20 +31,26 @@ const LoginScreen = ({ navigation }) => {
         />
 
         <Button
-          title="Login"
+          mode="contained"
+          icon="account-circle"
           onPress={() => {
             login(handle, password);
           }}
-        />
+        >
+          Login
+        </Button>
 
-        <View style={{ flexDirection: "row", marginTop: 20 }}>
+        <View style={styles.register}>
           <Text>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={styles.link}>Register</Text>
-          </TouchableOpacity>
+          <Button
+            icon="account-plus"
+            onPress={() => navigation.navigate("Register")}
+          >
+            Register
+          </Button>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -71,6 +72,10 @@ const styles = StyleSheet.create({
   },
   link: {
     color: "blue",
+  },
+  register: {
+    alignItems: "center",
+    marginTop: 40,
   },
 });
 

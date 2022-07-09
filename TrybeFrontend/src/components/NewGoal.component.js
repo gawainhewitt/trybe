@@ -20,6 +20,7 @@ function NewGoal() {
 
       <Button
         mode="contained"
+        icon="plus-circle"
         onPress={async () => {
           dispatch(uploadGoal(text));
           onChangeText("");

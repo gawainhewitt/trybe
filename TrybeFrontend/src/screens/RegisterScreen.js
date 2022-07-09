@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
-import {
-  Button,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
 
@@ -36,18 +30,24 @@ const RegisterScreen = ({ navigation }) => {
         />
 
         <Button
-          title="Register"
+          mode="contained"
+          icon="account-plus"
           onPress={() => {
             register(handle, password);
             navigation.navigate("Login");
           }}
-        />
+        >
+          Register
+        </Button>
 
-        <View style={{ flexDirection: "row", marginTop: 20 }}>
+        <View style={styles.register}>
           <Text>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.link}>Login</Text>
-          </TouchableOpacity>
+          <Button
+            icon="account-circle"
+            onPress={() => navigation.navigate("Login")}
+          >
+            Login
+          </Button>
         </View>
       </View>
     </View>
@@ -55,6 +55,10 @@ const RegisterScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  register: {
+    alignItems: "center",
+    marginTop: 40,
+  },
   container: {
     flex: 1,
     alignItems: "center",

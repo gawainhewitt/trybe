@@ -24,23 +24,33 @@ function Goal(props) {
   return (
     <SafeAreaView style={styles.viewStyle}>
       <Text style={styles.text}>{goal.goal_description}</Text>
-      <Button
-        title="Delete Goal"
-        onPress={() => {
-          dispatch(removeGoal(goal.id));
-          props.navigation.navigate("GoalsHome");
-        }}
-      />
-      <Button title="Update Goal" onPress={() => setShouldShow(!shouldShow)} />
+      <View style={styles.row}>
+        <Button
+          title="Update Goal"
+          onPress={() => setShouldShow(!shouldShow)}
+        />
+        <Button
+          title="Delete Goal"
+          onPress={() => {
+            dispatch(removeGoal(goal.id));
+            props.navigation.navigate("GoalsHome");
+          }}
+        />
+      </View>
 
       {shouldShow ? (
         <View>
-          <TextInput value={text} onChangeText={onChangeText} />
+          <TextInput
+            style={styles.input}
+            value={text}
+            onChangeText={onChangeText}
+          />
           <Button
             title="Update"
             onPress={() => {
               dispatch(editGoal({ id: goal.id, goal_description: text }));
               Keyboard.dismiss();
+              setShouldShow(!shouldShow);
             }}
           />
         </View>
@@ -56,6 +66,20 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 50,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 10,
+    justifyContent: "space-around",
+  },
+  input: {
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#bbb",
+    borderRadius: 5,
+    paddingHorizontal: 14,
+    backgroundColor: "white",
   },
 });
 

@@ -8,6 +8,7 @@ export default StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 14,
     backgroundColor: "white",
+    height: 35,
   },
   wrapper: {
     backgroundColor: "lightgrey",

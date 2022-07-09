@@ -18,7 +18,6 @@ function NewGoal() {
       />
 
       <Button
-        style={styles.wrapper}
         title="Create Goal"
         onPress={async () => {
           dispatch(uploadGoal(text));

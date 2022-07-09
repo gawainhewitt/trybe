@@ -19,7 +19,7 @@ function ViewGoals(props) {
   }, [dispatch]);
 
   const clickedItem = (id) => {
-    props.navigation.navigate("Goal", { id: id });
+    props.navigation.navigate("GoalDetailScreen", { id: id });
   };
 
   return (

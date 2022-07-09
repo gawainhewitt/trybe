@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, SafeAreaView } from "react-native";
 
-function Support() {
+function SupportNavigator() {
   return (
     <SafeAreaView>
       <Text>Support Tab</Text>
@@ -9,4 +9,4 @@ function Support() {
   );
 }
 
-export default Support;
+export default SupportNavigator;

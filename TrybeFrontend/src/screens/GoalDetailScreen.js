@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Keyboard } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextInput, Card, Title } from "react-native-paper";
+import { AuthContext } from "../context/AuthContext";
 
-function Goal(props) {
+function GoalDetailScreen(props) {
   const id = props.route.params.id;
   let goal = useSelector((state) => state.goals.find((goal) => goal.id === id));
 
   const [shouldShow, setShouldShow] = useState(false);
   const [text, onChangeText] = useState(goal.goal_description);
   const dispatch = useDispatch();
+  // const { user } = useContext(AuthContext);
 
   useEffect(() => {}, [dispatch]);
 
@@ -27,7 +29,7 @@ function Goal(props) {
         <Button
           onPress={() => {
             dispatch(removeGoal(goal.id));
-            props.navigation.navigate("GoalsHome");
+            props.navigation.navigate("GoalsScreen");
           }}
         >
           Delete Goal
@@ -85,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Goal;
+export default GoalDetailScreen;

@@ -3,7 +3,6 @@ async function updateGoal(id, goal_description) {
   const data = { goal_description: goal_description };
   const response = await fetch(url, {
     method: "PUT",
-    // mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },

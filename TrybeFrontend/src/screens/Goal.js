@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Keyboard } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, Card, Title } from "react-native-paper";
 
 function Goal(props) {
   const id = props.route.params.id;
@@ -16,7 +16,12 @@ function Goal(props) {
 
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <Text style={styles.text}>{goal.goal_description}</Text>
+      <Card style={styles.cardStyle}>
+        <Card.Content>
+          <Title>Goal</Title>
+          <Text>{goal.goal_description}</Text>
+        </Card.Content>
+      </Card>
       <View style={styles.row}>
         <Button onPress={() => setShouldShow(!shouldShow)}>Update Goal</Button>
         <Button
@@ -74,6 +79,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 14,
     backgroundColor: "white",
+  },
+  cardStyle: {
+    padding: 10,
   },
 });
 

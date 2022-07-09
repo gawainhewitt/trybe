@@ -12,7 +12,7 @@ export default StyleSheet.create({
     padding: 20,
   },
   cardStyle: {
-    margin: 10,
+    marginBottom: 10,
     padding: 10,
   },
 });

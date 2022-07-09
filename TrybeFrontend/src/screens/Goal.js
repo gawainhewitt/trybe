@@ -8,23 +8,22 @@ import {
   View,
   Keyboard,
 } from "react-native";
-import { editGoal } from "../../store/goals/goals.actions";
+import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch } from "react-redux";
 
 function Goal(props) {
   const data = props.route.params.data;
   const [shouldShow, setShouldShow] = useState(false);
-  const [text, onChangeText] = useState(data.title);
+  const [text, onChangeText] = useState(data.goal_description);
   const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.viewStyle}>
-      {/* <Text style={styles.text}>{data.goal_description}</Text> */}
-      <Text style={styles.text}>{data.title}</Text>
+      <Text style={styles.text}>{data.goal_description}</Text>
       <Button
         title="Delete Goal"
         onPress={() => {
-          dispatch(removeGoal(data._uuid));
+          dispatch(removeGoal(data.id));
           props.navigation.navigate("GoalsHome");
         }}
       />
@@ -36,7 +35,7 @@ function Goal(props) {
           <Button
             title="Update"
             onPress={() => {
-              dispatch(editGoal({ id: data._uuid, text: text }));
+              dispatch(editGoal({ id: data.id, goal_description: text }));
               Keyboard.dismiss();
               props.navigation.navigate("GoalsHome");
             }}

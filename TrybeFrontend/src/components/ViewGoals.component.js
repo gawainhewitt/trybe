@@ -21,8 +21,6 @@ function ViewGoals(props) {
     props.navigation.navigate("Goal", { data: data });
   };
 
-  // for fake backend
-
   return (
     <View style={styles.wrapper}>
       {isLoading ? (
@@ -30,34 +28,16 @@ function ViewGoals(props) {
       ) : (
         <FlatList
           data={goals}
-          keyExtractor={({ _uuid }, index) => _uuid} // changed from id to uuid for test api
+          keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
             <Text style={styles.goal} onPress={() => clickedItem(item)}>
-              {item.id + ". " + item.title}
+              {item.id + ". " + item.goal_description}
             </Text>
           )}
         />
       )}
     </View>
   );
-
-  // return (
-  //   <View style={styles.wrapper}>
-  //     {isLoading ? (
-  //       <Text>Loading...</Text>
-  //     ) : (
-  //       <FlatList
-  //         data={goals}
-  //         keyExtractor={({ id }, index) => id}
-  //         renderItem={({ item }) => (
-  //           <Text style={styles.goal} onPress={() => clickedItem(item)}>
-  //             {item.id + ". " + item.goal_description}
-  //           </Text>
-  //         )}
-  //       />
-  //     )}
-  //   </View>
-  // );
 }
 
 export default ViewGoals;

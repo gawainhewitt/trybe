@@ -11,9 +11,6 @@ function NewGoal() {
   return (
     <View style={styles.wrapper}>
       <TextInput
-        // ref={(input) => {
-        //   textInput = input;
-        // }}
         style={styles.input}
         placeholder="Enter Goal"
         onChangeText={onChangeText}
@@ -23,7 +20,7 @@ function NewGoal() {
       <Button
         style={styles.wrapper}
         title="Create Goal"
-        onPress={() => {
+        onPress={async () => {
           dispatch(uploadGoal(text));
           onChangeText("");
           Keyboard.dismiss();

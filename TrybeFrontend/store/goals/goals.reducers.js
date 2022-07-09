@@ -15,17 +15,16 @@ const goalSlice = createSlice({
       })
       // Upload goal success
       .addCase(uploadGoal.fulfilled, (state, action) => {
-        state.push(action.payload.items[0]);
+        state.push(action.payload);
       })
       // Delete goal success
       .addCase(removeGoal.fulfilled, (state, action) => {
-        return state.filter((goal) => goal._uuid !== action.payload._uuid);
+        console.log(action.payload);
+        return state.filter((goal) => goal.id !== action.payload.id);
       })
       // Edit goal success
       .addCase(editGoal.fulfilled, (state, action) => {
-        const index = state.findIndex(
-          (goal) => goal._uuid === action.payload._uuid
-        );
+        const index = state.findIndex((goal) => goal.id === action.payload.id);
         state[index] = action.payload;
         return state;
       });

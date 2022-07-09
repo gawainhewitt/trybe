@@ -1,19 +1,15 @@
-// for fake backend
-
-async function updateGoal(id, text) {
-  const url = `https://crudapi.co.uk/api/v1/task/${id}`; // different URL
-  const data = { title: `${text}` }; // different name, and in array
+async function updateGoal(id, goal_description) {
+  const url = `https://trybe-backend.herokuapp.com/goals/${id}/`;
+  const data = { goal_description: goal_description };
   const response = await fetch(url, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
+    method: "PUT",
+    // mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      Authorization:
-        "Bearer _Gbprof1o-5YCUuIkIctxkjmjA21HTOFpdbEOtoph4AoNKBZTg",
     },
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 export default updateGoal;

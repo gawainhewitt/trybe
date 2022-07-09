@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,21 +9,25 @@ import {
   Keyboard,
 } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Goal(props) {
-  const data = props.route.params.data;
+  const id = props.route.params.id;
+  let goal = useSelector((state) => state.goals.find((goal) => goal.id === id));
+
   const [shouldShow, setShouldShow] = useState(false);
-  const [text, onChangeText] = useState(data.goal_description);
+  const [text, onChangeText] = useState(goal.goal_description);
   const dispatch = useDispatch();
+
+  useEffect(() => {}, [dispatch]);
 
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <Text style={styles.text}>{data.goal_description}</Text>
+      <Text style={styles.text}>{goal.goal_description}</Text>
       <Button
         title="Delete Goal"
         onPress={() => {
-          dispatch(removeGoal(data.id));
+          dispatch(removeGoal(goal.id));
           props.navigation.navigate("GoalsHome");
         }}
       />
@@ -35,9 +39,8 @@ function Goal(props) {
           <Button
             title="Update"
             onPress={() => {
-              dispatch(editGoal({ id: data.id, goal_description: text }));
+              dispatch(editGoal({ id: goal.id, goal_description: text }));
               Keyboard.dismiss();
-              props.navigation.navigate("GoalsHome");
             }}
           />
         </View>

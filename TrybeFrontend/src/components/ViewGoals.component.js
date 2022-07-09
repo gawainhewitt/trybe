@@ -17,8 +17,8 @@ function ViewGoals(props) {
     load();
   }, [dispatch]);
 
-  const clickedItem = (data) => {
-    props.navigation.navigate("Goal", { data: data });
+  const clickedItem = (id) => {
+    props.navigation.navigate("Goal", { id: id });
   };
 
   return (
@@ -30,7 +30,7 @@ function ViewGoals(props) {
           data={goals}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
-            <Text style={styles.goal} onPress={() => clickedItem(item)}>
+            <Text style={styles.goal} onPress={() => clickedItem(item.id)}>
               {item.id + ". " + item.goal_description}
             </Text>
           )}

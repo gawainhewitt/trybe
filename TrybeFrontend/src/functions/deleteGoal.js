@@ -3,7 +3,7 @@ async function deleteGoal(id) {
   const response = await fetch(url, {
     method: "DELETE",
   });
-  // return response.json();
+
   return { id: id };
 }
 

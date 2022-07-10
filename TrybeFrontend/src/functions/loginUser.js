@@ -1,15 +1,13 @@
 import { AUTH_URL } from "../../config";
 
-const loginUser = async (handle, password) => {
+const loginUser = async (email, password) => {
   try {
-    const response = await fetch(`${AUTH_URL}/sessions/`, {
+    const response = await fetch(`${AUTH_URL}/Users/login`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify({
-        session: {
-          handle: handle,
-          password: password,
-        },
+        email: email,
+        password: password,
       }),
     });
     const confirmation = await response.json();

@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
 
 const RegisterScreen = ({ navigation }) => {
-  const [handle, setHandle] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const { register } = useContext(AuthContext);
@@ -16,9 +16,9 @@ const RegisterScreen = ({ navigation }) => {
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
-          value={handle}
-          placeholder="Enter handle"
-          onChangeText={(text) => setHandle(text)}
+          value={email}
+          placeholder="Enter email"
+          onChangeText={(text) => setEmail(text)}
         />
 
         <TextInput
@@ -33,7 +33,7 @@ const RegisterScreen = ({ navigation }) => {
           mode="contained"
           icon="account-plus"
           onPress={() => {
-            register(handle, password);
+            register(email, password);
             navigation.navigate("Login");
           }}
         >

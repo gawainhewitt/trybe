@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
 import { loadGoals } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "react-native-paper";
 
+import { AuthContext } from "../context/AuthContext";
+
 function ViewGoals(props) {
+  const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
   let goals = useSelector((state) => state.goals);
 
   useEffect(() => {
     async function load() {
-      await dispatch(loadGoals());
+      await dispatch(loadGoals(user.id));
       setLoading(false);
     }
     load();

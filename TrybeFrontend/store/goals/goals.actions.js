@@ -6,9 +6,9 @@ import updateGoal from "../../src/functions/updateGoal";
 
 export const loadGoals = createAsyncThunk(
   "goals/loadGoals",
-  async (thunkAPI) => {
+  async (token, thunkAPI) => {
     try {
-      const response = await fetchGoals();
+      const response = await fetchGoals(token);
       return response;
     } catch (err) {
       throw err;
@@ -18,9 +18,9 @@ export const loadGoals = createAsyncThunk(
 
 export const uploadGoal = createAsyncThunk(
   "goals/uploadGoal",
-  async (text, thunkAPI) => {
+  async ({ token, text }, thunkAPI) => {
     try {
-      const response = await postGoal(text);
+      const response = await postGoal(token, text);
       return response;
     } catch (err) {
       throw err;
@@ -30,9 +30,11 @@ export const uploadGoal = createAsyncThunk(
 
 export const removeGoal = createAsyncThunk(
   "goals/removeGoal",
-  async (id, thunkAPI) => {
+  async ({ token, id }, thunkAPI) => {
     try {
-      const response = await deleteGoal(id);
+      console.log("token", token);
+      console.log("id", id);
+      const response = await deleteGoal(token, id);
       return response;
     } catch (err) {
       throw err;
@@ -42,9 +44,9 @@ export const removeGoal = createAsyncThunk(
 
 export const editGoal = createAsyncThunk(
   "goals/updateGoal",
-  async ({ id, goal_description }, thunkAPI) => {
+  async ({ token, id, goal_description }, thunkAPI) => {
     try {
-      const response = await updateGoal(id, goal_description);
+      const response = await updateGoal(token, id, goal_description);
       return response;
     } catch (err) {
       throw err;

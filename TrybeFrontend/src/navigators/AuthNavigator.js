@@ -19,7 +19,7 @@ const AuthNavigator = () => {
         headerShown: false,
       }}
     >
-      {user.session_key ? (
+      {user.id ? (
         <Stack.Screen name="Home" component={MainNavigator} />
       ) : (
         <>

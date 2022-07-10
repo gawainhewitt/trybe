@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
 
 const LoginScreen = ({ navigation }) => {
-  const [handle, setHandle] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { login } = useContext(AuthContext);
 
@@ -17,9 +17,9 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
-          value={handle}
-          placeholder="Enter handle"
-          onChangeText={(text) => setHandle(text)}
+          value={email}
+          placeholder="Enter email"
+          onChangeText={(text) => setEmail(text)}
         />
 
         <TextInput
@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
           mode="contained"
           icon="account-circle"
           onPress={() => {
-            login(handle, password);
+            login(email, password);
           }}
         >
           Login

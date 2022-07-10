@@ -9,14 +9,14 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUserInfo] = useState({});
 
-  const register = async (handle, password) => {
-    const user = await registerUser(handle, password);
+  const register = async (email, password) => {
+    const user = await registerUser(email, password);
     setUserInfo(user);
     AsyncStorage.setItem("user", JSON.stringify(user));
   };
 
-  const login = async (handle, password) => {
-    const user = await loginUser(handle, password);
+  const login = async (email, password) => {
+    const user = await loginUser(email, password);
     setUserInfo(user);
     AsyncStorage.mergeItem("user", JSON.stringify(user));
   };

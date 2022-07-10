@@ -12,7 +12,7 @@ function GoalDetailScreen(props) {
   const [shouldShow, setShouldShow] = useState(false);
   const [text, onChangeText] = useState(goal.goal_description);
   const dispatch = useDispatch();
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {}, [dispatch]);
 
@@ -31,7 +31,7 @@ function GoalDetailScreen(props) {
         <Button
           icon="delete"
           onPress={() => {
-            dispatch(removeGoal(goal.id));
+            dispatch(removeGoal({ token: user.id, id: goal.id }));
             props.navigation.navigate("GoalsScreen");
           }}
         >
@@ -50,7 +50,13 @@ function GoalDetailScreen(props) {
             title="Update"
             mode="contained"
             onPress={() => {
-              dispatch(editGoal({ id: goal.id, goal_description: text }));
+              dispatch(
+                editGoal({
+                  token: user.id,
+                  id: goal.id,
+                  goal_description: text,
+                })
+              );
               Keyboard.dismiss();
               setShouldShow(!shouldShow);
             }}

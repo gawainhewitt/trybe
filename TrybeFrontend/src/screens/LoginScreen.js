@@ -5,6 +5,7 @@ import { TextInput, Button } from "react-native-paper";
 
 import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
+import { createAlert } from "../functions/createAlert";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
@@ -34,7 +35,14 @@ const LoginScreen = ({ navigation }) => {
           mode="contained"
           icon="account-circle"
           onPress={() => {
-            login(email, password);
+            if(email === null){
+              createAlert("Error!", "email field cannot be empty");
+            }else if(password === null){
+              createAlert("Error!", "password field cannot be empty");
+            }else{
+              console.log(email, password);
+              login(email, password);
+            }
           }}
         >
           Login

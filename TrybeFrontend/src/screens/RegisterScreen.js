@@ -3,12 +3,24 @@ import { Text, View, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
+import { createAlert } from "../functions/createAlert";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const { register } = useContext(AuthContext);
+
+  const handleRegister = () => {
+    if(email === null){
+      createAlert("Error!", "email field cannot be empty");
+    }else if(password === null){
+      createAlert("Error!", "password field cannot be empty");
+    }else{
+      register(email, password);
+      navigation.navigate("Login");
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -33,8 +45,7 @@ const RegisterScreen = ({ navigation }) => {
           mode="contained"
           icon="account-plus"
           onPress={() => {
-            register(email, password);
-            navigation.navigate("Login");
+            handleRegister();
           }}
         >
           Register

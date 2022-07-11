@@ -4,6 +4,7 @@ import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextInput, Card, Title } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
+import { createAlert } from "../functions/createAlert";
 
 function GoalDetailScreen(props) {
   const id = props.route.params.id;
@@ -50,15 +51,19 @@ function GoalDetailScreen(props) {
             title="Update"
             mode="contained"
             onPress={() => {
-              dispatch(
-                editGoal({
-                  token: user.id,
-                  id: goal.id,
-                  goal_description: text,
-                })
-              );
-              Keyboard.dismiss();
-              setShouldShow(!shouldShow);
+              if(text != "") {
+                dispatch(
+                  editGoal({
+                    token: user.id,
+                    id: goal.id,
+                    goal_description: text,
+                  })
+                );
+                Keyboard.dismiss();
+                setShouldShow(!shouldShow);
+              }else{
+                createAlert("Invalid Input!", "Field cannot be empty");
+              }
             }}
           >
             Update

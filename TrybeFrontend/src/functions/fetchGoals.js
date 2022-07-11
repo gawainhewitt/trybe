@@ -1,11 +1,13 @@
-const fetchGoals = async () => {
-  try{
-    const response = await fetch("https://trybe-backend.herokuapp.com/goals");
-    const data = await response.json();
-    return data;
-  }catch(error){
+import { AUTH_URL } from "../../config";
+
+const fetchGoals = async (token) => {
+  const url = `${AUTH_URL}/Goals?access_token=${token}`;
+  try {
+    const response = await fetch(url);
+    return response.json();
+  } catch (error) {
     console.log(error);
   }
-}
+};
 
 export default fetchGoals;

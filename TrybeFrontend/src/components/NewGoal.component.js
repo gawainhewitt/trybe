@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { TextInput, Button, View } from "react-native";
+import React, { useState, useContext } from "react";
+import { Keyboard, View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 import styles from "./NewGoal.component.style";
-import postData from "../functions/postData";
+import { uploadGoal } from "../../store/goals/goals.actions";
+import { useDispatch } from "react-redux";
+
+import { AuthContext } from "../context/AuthContext";
 
 function NewGoal() {
+  const { user } = useContext(AuthContext);
   const [text, onChangeText] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.wrapper}>
@@ -16,10 +22,16 @@ function NewGoal() {
       />
 
       <Button
-        style={styles.wrapper}
-        title="Create Goal"
-        onPress={() => postData(text)}
-      />
+        mode="contained"
+        icon="plus-circle"
+        onPress={async () => {
+          dispatch(uploadGoal({ token: user.id, text: text }));
+          onChangeText("");
+          Keyboard.dismiss();
+        }}
+      >
+        Create Goal
+      </Button>
     </View>
   );
 }

@@ -17,6 +17,22 @@ function GoalDetailScreen(props) {
 
   useEffect(() => {}, [dispatch]);
 
+  const handleEditGoal = () => {
+    if(text != "") {
+      dispatch(
+        editGoal({
+          token: user.id,
+          id: goal.id,
+          goal_description: text,
+        })
+      );
+      Keyboard.dismiss();
+      setShouldShow(!shouldShow);
+    }else{
+      createAlert("Invalid Input!", "Field cannot be empty");
+    }
+  }
+
   return (
     <SafeAreaView style={styles.viewStyle}>
       <Card style={styles.cardStyle}>
@@ -51,19 +67,7 @@ function GoalDetailScreen(props) {
             title="Update"
             mode="contained"
             onPress={() => {
-              if(text != "") {
-                dispatch(
-                  editGoal({
-                    token: user.id,
-                    id: goal.id,
-                    goal_description: text,
-                  })
-                );
-                Keyboard.dismiss();
-                setShouldShow(!shouldShow);
-              }else{
-                createAlert("Invalid Input!", "Field cannot be empty");
-              }
+              handleEditGoal();
             }}
           >
             Update

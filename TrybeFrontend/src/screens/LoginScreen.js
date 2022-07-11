@@ -12,6 +12,16 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState(null);
   const { login } = useContext(AuthContext);
 
+  const handleLogin = () => {
+    if(email === null){
+      createAlert("Error!", "email field cannot be empty");
+    }else if(password === null){
+      createAlert("Error!", "password field cannot be empty");
+    }else{
+      login(email, password);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Logo />
@@ -35,14 +45,7 @@ const LoginScreen = ({ navigation }) => {
           mode="contained"
           icon="account-circle"
           onPress={() => {
-            if(email === null){
-              createAlert("Error!", "email field cannot be empty");
-            }else if(password === null){
-              createAlert("Error!", "password field cannot be empty");
-            }else{
-              console.log(email, password);
-              login(email, password);
-            }
+            handleLogin();
           }}
         >
           Login

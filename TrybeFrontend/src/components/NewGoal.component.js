@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Keyboard, View, Alert } from "react-native";
+import { Keyboard, View} from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import styles from "./NewGoal.component.style";
 import { uploadGoal } from "../../store/goals/goals.actions";
 import { useDispatch } from "react-redux";
+import { createAlert } from "../functions/createAlert";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -27,18 +28,10 @@ function NewGoal() {
         onPress={async () => {
           if(text != "") {
             dispatch(uploadGoal({ token: user.id, text: text }));
-          onChangeText("");
-          Keyboard.dismiss();
+            onChangeText("");
+            Keyboard.dismiss();
           }else{
-            const createTwoButtonAlert = (title, msg) =>
-              Alert.alert(
-                title,
-                msg,
-                [
-                  { text: "OK", onPress: () => console.log("OK Pressed") }
-                ]
-              );
-            createTwoButtonAlert("Invalid Input!", "No goal specified");
+            createAlert("Invalid Input!", "No goal specified");
           }
         }}
       >

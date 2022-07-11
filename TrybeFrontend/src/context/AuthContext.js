@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 import registerUser from "../functions/registerUser";
 import loginUser from "../functions/loginUser";
+import logoutUser from "../functions/logoutUser";
 
 export const AuthContext = createContext();
 
@@ -21,7 +22,8 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.mergeItem("user", JSON.stringify(user));
   };
 
-  const logout = () => {
+  const logout = async () => {
+    // await logoutUser(token);
     AsyncStorage.removeItem("user");
     setUserInfo({});
   };

@@ -5,7 +5,7 @@ import { Title } from "react-native-paper";
 function Logo() {
   return (
     <View style={styles.container}>
-      <Title style={styles.title}>TryBe</Title>
+      <Title style={styles.title}>Trybe</Title>
       <Image
         style={styles.logo}
         source={{

@@ -13,6 +13,16 @@ function NewGoal() {
   const [text, onChangeText] = useState("");
   const dispatch = useDispatch();
 
+  const handleUploadGoal = () => {
+    if(text != "") {
+      dispatch(uploadGoal({ token: user.id, text: text }));
+      onChangeText("");
+      Keyboard.dismiss();
+    }else{
+      createAlert("Invalid Input!", "No goal specified");
+    }
+  }
+
   return (
     <View style={styles.wrapper}>
       <TextInput
@@ -26,13 +36,7 @@ function NewGoal() {
         mode="contained"
         icon="plus-circle"
         onPress={async () => {
-          if(text != "") {
-            dispatch(uploadGoal({ token: user.id, text: text }));
-            onChangeText("");
-            Keyboard.dismiss();
-          }else{
-            createAlert("Invalid Input!", "No goal specified");
-          }
+          handleUploadGoal();
         }}
       >
         Create Goal

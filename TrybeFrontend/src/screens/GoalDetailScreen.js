@@ -74,8 +74,40 @@ function GoalDetailScreen(props) {
           </Button>
         </View>
       ) : null}
+
+      <View>
+      <TextInput
+            style={styles.input}
+            value={"email address"}
+            onChangeText={onChangeText}
+          />
+          <Button
+            mode="contained"
+            onPress={() => {
+              emailSupporter()
+            }}
+          >
+            Add Supporter
+          </Button>
+      </View>
+
     </SafeAreaView>
   );
+}
+
+const emailSupporter = async () => {
+  console.log('email sent');
+  const url = `https://api.sendgrid.com/v3/mail/send`;
+  const data = {"personalizations" : [{"to":[{"email":"gawain@gawainhewitt.co.uk","name":"Gawain"}],"subject":"Please join my Trybe"}],"content": [{"type": "text/plain", "value": "I am trying to drink more water, but Makers do not have any. I think if you helped me then I would be more successful"}],"from":{"email":"lukemstorey@gmail.com","name":"Trybe"},"reply_to":{"email":"lukemstorey@gmail.com","name":"Trybe"}};
+  const response = await fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Authorization": "Bearer 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",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 }
 
 const styles = StyleSheet.create({

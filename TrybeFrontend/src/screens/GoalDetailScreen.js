@@ -36,6 +36,15 @@ function GoalDetailScreen(props) {
     }
   };
 
+  const handleSubmitSupporter = () => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      emailSupporter(email, goal);
+      Keyboard.dismiss();
+    } else {
+      createAlert("Invalid Input!", "Field must be an email");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.viewStyle}>
       <Card style={styles.cardStyle}>
@@ -88,8 +97,7 @@ function GoalDetailScreen(props) {
         <Button
           mode="contained"
           onPress={() => {
-            emailSupporter(email, goal);
-            Keyboard.dismiss();
+            handleSubmitSupporter();
           }}
         >
           Add Supporter

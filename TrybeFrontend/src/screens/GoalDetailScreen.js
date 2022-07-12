@@ -39,6 +39,7 @@ function GoalDetailScreen(props) {
   const handleSubmitSupporter = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       emailSupporter(email, goal);
+      setEmail(null);
       Keyboard.dismiss();
     } else {
       createAlert("Invalid Input!", "Field must be an email");
@@ -69,7 +70,7 @@ function GoalDetailScreen(props) {
       </View>
 
       {shouldShow ? (
-        <View>
+        <View style={styles.update}>
           <TextInput
             style={styles.input}
             value={text}
@@ -77,6 +78,7 @@ function GoalDetailScreen(props) {
           />
           <Button
             title="Update"
+            icon="content-save-edit"
             mode="contained"
             onPress={() => {
               handleEditGoal();
@@ -96,6 +98,7 @@ function GoalDetailScreen(props) {
         />
         <Button
           mode="contained"
+          icon="account-multiple-plus"
           onPress={() => {
             handleSubmitSupporter();
           }}
@@ -131,6 +134,9 @@ const styles = StyleSheet.create({
   },
   cardStyle: {
     padding: 10,
+  },
+  update: {
+    marginBottom: 20,
   },
 });
 

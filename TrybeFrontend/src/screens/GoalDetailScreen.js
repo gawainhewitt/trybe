@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, TextInput, Card, Title } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
+import getEnvVars from "../../environment";
+const { REACT_APP_APIKEY } = getEnvVars();
 
 function GoalDetailScreen(props) {
   const id = props.route.params.id;
@@ -98,12 +100,12 @@ function GoalDetailScreen(props) {
 const emailSupporter = async () => {
   console.log('email sent');
   const url = `https://api.sendgrid.com/v3/mail/send`;
-  const data = {"personalizations" : [{"to":[{"email":"gawain@gawainhewitt.co.uk","name":"Gawain"}],"subject":"Please join my Trybe"}],"content": [{"type": "text/plain", "value": "I am trying to drink more water, but Makers do not have any. I think if you helped me then I would be more successful"}],"from":{"email":"lukemstorey@gmail.com","name":"Trybe"},"reply_to":{"email":"lukemstorey@gmail.com","name":"Trybe"}};
+  const data = {"personalizations" : [{"to":[{"email":"lukemstorey@gmail.com","name":"Luke"}],"subject":"Please join my Trybe"}],"content": [{"type": "text/plain", "value": "I am trying to drink more water, but Makers do not have any. I think if you helped me then I would be more successful"}],"from":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"},"reply_to":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"}};
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
     headers: {
-      "Authorization": "Bearer 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",
+      "Authorization": `Bearer ${REACT_APP_APIKEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),

@@ -7,7 +7,7 @@ import { Card } from "react-native-paper";
 
 import { AuthContext } from "../context/AuthContext";
 
-function ViewGoals(props) {
+function ViewSupporterGoals(props) {
   const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function ViewGoals(props) {
   }, [dispatch]);
 
   const clickedItem = (id) => {
-    props.navigation.navigate("GoalDetailScreen", { id: id });
+    props.navigation.navigate("SupportGoalDetailScreen", { id: id });
   };
 
   return (
@@ -47,4 +47,4 @@ function ViewGoals(props) {
   );
 }
 
-export default ViewGoals;
+export default ViewSupporterGoals;

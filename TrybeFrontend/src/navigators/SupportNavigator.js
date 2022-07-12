@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavigationBar from "../components/NavigationBar";
 import SupportGoalsScreen from "../screens/SupportGoalsScreen";
-import GoalDetailScreen from "../screens/GoalDetailScreen";
+import SupportGoalDetailScreen from "../screens/SupportGoalDetailScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +16,7 @@ function SupportNavigator() {
       }}
     >
       <Stack.Screen name="SupportGoalsScreen" component={SupportGoalsScreen} />
-      <Stack.Screen name="GoalDetailScreen" component={GoalDetailScreen} />
+      <Stack.Screen name="SupportGoalDetailScreen" component={SupportGoalDetailScreen} />
     </Stack.Navigator>
   );
 }

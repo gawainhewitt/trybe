@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, TextInput, Card, Title } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
+import postMessage from "../functions/postMessage";
 
 function SupportGoalDetailScreen(props) {
   const id = props.route.params.id;
@@ -20,6 +21,7 @@ function SupportGoalDetailScreen(props) {
 
   const handleSendSupport = (message) => {
     console.log(message);
+    postMessage(user.id, message);
   };
 
   return (

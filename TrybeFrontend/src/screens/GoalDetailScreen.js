@@ -16,6 +16,7 @@ function GoalDetailScreen(props) {
   const [text, onChangeText] = useState(goal.goal_description);
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {}, [dispatch]);
 
@@ -80,13 +81,14 @@ function GoalDetailScreen(props) {
       <View>
       <TextInput
             style={styles.input}
-            value={"email address"}
-            onChangeText={onChangeText}
+            value={email}
+            placeholder='enter supporter email'
+            onChangeText={text => setEmail(text)}
           />
           <Button
             mode="contained"
             onPress={() => {
-              emailSupporter()
+              emailSupporter(email)
             }}
           >
             Add Supporter
@@ -97,10 +99,10 @@ function GoalDetailScreen(props) {
   );
 }
 
-const emailSupporter = async () => {
+const emailSupporter = async (email) => {
   console.log('email sent');
   const url = `https://api.sendgrid.com/v3/mail/send`;
-  const data = {"personalizations" : [{"to":[{"email":"lukemstorey@gmail.com","name":"Luke"}],"subject":"Please join my Trybe"}],"content": [{"type": "text/plain", "value": "I am trying to drink more water, but Makers do not have any. I think if you helped me then I would be more successful"}],"from":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"},"reply_to":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"}};
+  const data = {"personalizations" : [{"to":[{"email":`${email}`}],"subject":"Please join my Trybe"}],"content": [{"type": "text/plain", "value": "I am trying to drink more water, but Makers do not have any. I think if you helped me then I would be more successful"}],"from":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"},"reply_to":{"email":"gawain@gawainhewitt.co.uk","name":"Trybe"}};
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",

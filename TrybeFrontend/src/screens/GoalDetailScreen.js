@@ -88,7 +88,8 @@ function GoalDetailScreen(props) {
           <Button
             mode="contained"
             onPress={() => {
-              emailSupporter(email)
+              emailSupporter(email);
+              Keyboard.dismiss();
             }}
           >
             Add Supporter

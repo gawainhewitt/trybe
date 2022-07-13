@@ -1,11 +1,11 @@
 import { AUTH_URL } from "../../config";
 
-async function updateGoal(token, id, goal_description) {
+async function updateGoal(token, id, goal_description, progress) {
+  console.log(progress);
   // const url = `https://trybe-backend.herokuapp.com/goals/${id}/`;
   const url = `${AUTH_URL}/Goals?access_token=${token}`;
-  console.log(url);
 
-  const data = { goal_description: goal_description, id: id };
+  const data = { goal_description: goal_description, id: id, progress: progress };
   const response = await fetch(url, {
     method: "PUT",
     headers: {

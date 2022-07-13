@@ -41,6 +41,9 @@ function ViewGoals(props) {
               </Card.Content>
             </Card>
           )}
+          ListFooterComponent={() => (
+            <View style={{padding: 70}}></View>
+      )}
         />
       )}
     </View>

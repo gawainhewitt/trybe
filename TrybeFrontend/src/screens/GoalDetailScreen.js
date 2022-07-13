@@ -123,7 +123,6 @@ function GoalDetailScreen(props) {
         </Button>
       </View>
           
-      <View>
       <Text style={styles.text}>Encouragement from your Trybe</Text>
         <FlatList
             data={messages}
@@ -135,8 +134,10 @@ function GoalDetailScreen(props) {
                 </Card.Content>
               </Card>
             )}
-          />
-          </View>    
+            ListFooterComponent={() => (
+              <View style={{padding: 190}}></View>
+        )}
+          />  
     </SafeAreaView>
   );
 }

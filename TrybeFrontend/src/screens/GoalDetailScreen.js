@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Keyboard, FlatList } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextInput, Card, Title } from "react-native-paper";
+import { Button, TextInput, Card, Title, ProgressBar } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
 
@@ -34,6 +34,7 @@ function GoalDetailScreen(props) {
           token: user.id,
           id: goal.id,
           goal_description: text,
+          progress: goal.progress
         })
       );
       Keyboard.dismiss();
@@ -53,12 +54,20 @@ function GoalDetailScreen(props) {
     }
   };
 
+  const updateProgress = () => {
+    console.log("update progress");
+    let updatedProgress = goal.progress + 0.25;
+    dispatch(editGoal({token: user.id, id: goal.id, goal_description: goal.goal_description, progress: updatedProgress}));
+  }
+
   return (
     <SafeAreaView style={styles.viewStyle}>
       <Card style={styles.cardStyle}>
         <Card.Content>
           <Title>Goal</Title>
           <Text>{goal.goal_description}</Text>
+          <Button onPress={() => updateProgress()}>+</Button>
+          <ProgressBar progress={goal.progress}/>
         </Card.Content>
       </Card>
       <View style={styles.row}>
@@ -114,7 +123,6 @@ function GoalDetailScreen(props) {
         </Button>
       </View>
           
-      <View>
       <Text style={styles.text}>Encouragement from your Trybe</Text>
         <FlatList
             data={messages}
@@ -126,8 +134,10 @@ function GoalDetailScreen(props) {
                 </Card.Content>
               </Card>
             )}
-          />
-          </View>    
+            ListFooterComponent={() => (
+              <View style={{padding: 190}}></View>
+        )}
+          />  
     </SafeAreaView>
   );
 }

@@ -3,7 +3,7 @@ import { FlatList, View, Text } from "react-native";
 import styles from "./ViewGoals.component.style";
 import { loadGoals } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "react-native-paper";
+import { Card, ProgressBar } from "react-native-paper";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -37,9 +37,13 @@ function ViewGoals(props) {
             <Card style={styles.cardStyle} onPress={() => clickedItem(item.id)}>
               <Card.Content>
                 <Text>{item.goal_description}</Text>
+                <ProgressBar progress={item.progress}/>
               </Card.Content>
             </Card>
           )}
+          ListFooterComponent={() => (
+            <View style={{padding: 70}}></View>
+      )}
         />
       )}
     </View>

@@ -44,9 +44,9 @@ export const removeGoal = createAsyncThunk(
 
 export const editGoal = createAsyncThunk(
   "goals/updateGoal",
-  async ({ token, id, goal_description }, thunkAPI) => {
+  async ({ token, id, goal_description, progress }, thunkAPI) => {
     try {
-      const response = await updateGoal(token, id, goal_description);
+      const response = await updateGoal(token, id, goal_description, progress);
       return response;
     } catch (err) {
       throw err;

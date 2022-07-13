@@ -1,8 +1,9 @@
-import { AUTH_URL } from "../../config";
+import getEnvVars from "../../environment";
+const { BACKEND_URL } = getEnvVars();
 
 async function postGoal(token, text) {
   // const url = "https://trybe-backend.herokuapp.com/goals/";
-  const url = `${AUTH_URL}/Goals?access_token=${token}`;
+  const url = `${BACKEND_URL}/Goals?access_token=${token}`;
   const data = { goal_description: text };
   const response = await fetch(url, {
     method: "POST",

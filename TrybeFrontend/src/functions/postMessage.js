@@ -1,7 +1,8 @@
-import { AUTH_URL } from "../../config";
+import getEnvVars from "../../environment";
+const { BACKEND_URL } = getEnvVars();
 
 async function postMessage(token, text) {
-  const url = `${AUTH_URL}/Messages?access_token=${token}`;
+  const url = `${BACKEND_URL}/Messages?access_token=${token}`;
   const data = { message: text };
   const response = await fetch(url, {
     method: "POST",

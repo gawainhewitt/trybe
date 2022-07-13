@@ -1,7 +1,8 @@
-import { AUTH_URL } from "../../config";
+import getEnvVars from "../../environment";
+const { BACKEND_URL } = getEnvVars();
 
 const logoutUser = async (token) => {
-  const url = `${AUTH_URL}/Users/logout?access_token=${token}`;
+  const url = `${BACKEND_URL}/Users/logout?access_token=${token}`;
 
   try {
     const response = await fetch(url, {

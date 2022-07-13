@@ -4,15 +4,15 @@
 
 ## Team
 
-Luiza 
-Kieran
-George
-Luke
-Gawain
+[Luiza](https://github.com/LGretzk) <br>
+[Kieran](https://github.com/K-Carty) <br>
+[George](https://github.com/GeorgeDainton) <br>
+[Luke](https://github.com/lukestorey95) <br>
+[Gawain](https://github.com/gawainhewitt) <br>
 
 ## Introduction
 
-Welcome to Trybe. This is our Makers Academy final project which we have built in 8 days. <br>
+Welcome to Trybe. This is our [Makers Academy](https://makers.tech/) final project which we have built in 8 days. <br>
 
 Trybe is an app that helps to build and manage a community in the supporting of achieving bespoke goals. The idea is a group of friends, your TRYBE (TM) will help motivate you with encouragement, while the app also allows you to track and share progress. We concieved it as a type of inverse to the Strave style of tracking, in that your network is small and private, and goals can range from things you would be proud to share, to things you may want to stay discreet about. 
 

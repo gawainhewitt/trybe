@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SafeAreaView, StyleSheet, Text, View, Keyboard } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Keyboard, FlatList } from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextInput, Card, Title } from "react-native-paper";
@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
 
 import emailSupporter from "../functions/emailSupporter";
+import { loadMessages } from "../../store/goals/messages.actions";
 
 function GoalDetailScreen(props) {
   const id = props.route.params.id;
@@ -17,8 +18,14 @@ function GoalDetailScreen(props) {
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const [email, setEmail] = useState(null);
+  const messages = useSelector((state) => state.messages);
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    function load() {
+      dispatch(loadMessages(user.id));
+    }
+    load();
+  }, [dispatch]);
 
   const handleEditGoal = () => {
     if (text != "") {
@@ -106,6 +113,21 @@ function GoalDetailScreen(props) {
           Add Supporter
         </Button>
       </View>
+          
+      <View>
+      <Text style={styles.text}>Encouragement from your Trybe</Text>
+        <FlatList
+            data={messages}
+            keyExtractor={({ id }, index) => id}
+            renderItem={({ item }) => (
+              <Card style={styles.cardStyle}>
+                <Card.Content>
+                  <Text>{item.message}</Text>
+                </Card.Content>
+              </Card>
+            )}
+          />
+          </View>    
     </SafeAreaView>
   );
 }
@@ -116,7 +138,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    fontSize: 50,
+    marginTop: 20,
+    marginBottom: 10,
+    fontSize: 20,
+    textAlign: "center",
+    padding: 10
   },
   row: {
     flexDirection: "row",

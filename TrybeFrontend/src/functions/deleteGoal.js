@@ -2,14 +2,16 @@ import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 
 async function deleteGoal(token, id) {
-  const url = `${BACKEND_URL}/Goals/${id}?access_token=${token}`;
+  const url = `${BACKEND_URL}/goals/${id}/`;
 
-  const response = await fetch(url, {
+  const response = fetch(url, {
     method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
   });
-  if (response.ok) {
-    return { id: id };
-  }
+  console.log("do we even hit here?");
+  return { id: id };
 }
 
 export default deleteGoal;

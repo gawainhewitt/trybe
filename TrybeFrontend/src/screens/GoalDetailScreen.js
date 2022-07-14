@@ -1,8 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SafeAreaView, StyleSheet, Text, View, Keyboard, FlatList } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Keyboard,
+  FlatList,
+} from "react-native";
 import { removeGoal, editGoal } from "../../store/goals/goals.actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextInput, Card, Title, ProgressBar } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  Card,
+  Title,
+  ProgressBar,
+} from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
 
@@ -22,7 +35,7 @@ function GoalDetailScreen(props) {
 
   useEffect(() => {
     function load() {
-      dispatch(loadMessages(user.id));
+      dispatch(loadMessages(user.auth_token));
     }
     load();
   }, [dispatch]);
@@ -31,10 +44,10 @@ function GoalDetailScreen(props) {
     if (text != "") {
       dispatch(
         editGoal({
-          token: user.id,
+          token: user.auth_token,
           id: goal.id,
           goal_description: text,
-          progress: goal.progress
+          progress: goal.progress,
         })
       );
       Keyboard.dismiss();
@@ -56,9 +69,16 @@ function GoalDetailScreen(props) {
 
   const updateProgress = () => {
     console.log("update progress");
-    let updatedProgress = goal.progress + 0.25;
-    dispatch(editGoal({token: user.id, id: goal.id, goal_description: goal.goal_description, progress: updatedProgress}));
-  }
+    let updatedProgress = parseFloat(goal.progress) + 0.25;
+    dispatch(
+      editGoal({
+        token: user.auth_token,
+        id: goal.id,
+        goal_description: goal.goal_description,
+        progress: updatedProgress,
+      })
+    );
+  };
 
   return (
     <SafeAreaView style={styles.viewStyle}>
@@ -67,7 +87,7 @@ function GoalDetailScreen(props) {
           <Title>Goal</Title>
           <Text>{goal.goal_description}</Text>
           <Button onPress={() => updateProgress()}>+</Button>
-          <ProgressBar progress={goal.progress}/>
+          <ProgressBar progress={parseFloat(goal.progress)} />
         </Card.Content>
       </Card>
       <View style={styles.row}>
@@ -77,7 +97,7 @@ function GoalDetailScreen(props) {
         <Button
           icon="delete"
           onPress={() => {
-            dispatch(removeGoal({ token: user.id, id: goal.id }));
+            dispatch(removeGoal({ token: user.auth_token, id: goal.id }));
             props.navigation.navigate("GoalsScreen");
           }}
         >
@@ -122,22 +142,20 @@ function GoalDetailScreen(props) {
           Add Supporter
         </Button>
       </View>
-          
+
       <Text style={styles.text}>Encouragement from your Trybe</Text>
-        <FlatList
-            data={messages}
-            keyExtractor={({ id }, index) => id}
-            renderItem={({ item }) => (
-              <Card style={styles.cardStyle}>
-                <Card.Content>
-                  <Text>{item.message}</Text>
-                </Card.Content>
-              </Card>
-            )}
-            ListFooterComponent={() => (
-              <View style={{padding: 190}}></View>
+      <FlatList
+        data={messages}
+        keyExtractor={({ id }, index) => id}
+        renderItem={({ item }) => (
+          <Card style={styles.cardStyle}>
+            <Card.Content>
+              <Text>{item.message}</Text>
+            </Card.Content>
+          </Card>
         )}
-          />  
+        ListFooterComponent={() => <View style={{ padding: 190 }}></View>}
+      />
     </SafeAreaView>
   );
 }
@@ -152,7 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     textAlign: "center",
-    padding: 10
+    padding: 10,
   },
   row: {
     flexDirection: "row",

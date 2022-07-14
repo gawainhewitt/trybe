@@ -32,8 +32,6 @@ export const removeGoal = createAsyncThunk(
   "goals/removeGoal",
   async ({ token, id }, thunkAPI) => {
     try {
-      console.log("token", token);
-      console.log("id", id);
       const response = await deleteGoal(token, id);
       return response;
     } catch (err) {

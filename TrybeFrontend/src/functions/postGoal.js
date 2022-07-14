@@ -2,14 +2,14 @@ import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 
 async function postGoal(token, text) {
-  // const url = "https://trybe-backend.herokuapp.com/goals/";
-  const url = `${BACKEND_URL}/Goals?access_token=${token}`;
+  const url = `${BACKEND_URL}/goals/`;
   const data = { goal_description: text };
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Token ${token}`,
     },
     body: JSON.stringify(data),
   });

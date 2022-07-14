@@ -9,7 +9,9 @@ import postMessage from "../functions/postMessage";
 
 function SupportGoalDetailScreen(props) {
   const id = props.route.params.id;
-  let goal = useSelector((state) => state.supporterGoals.find((goal) => goal.id === id));
+  let goal = useSelector((state) =>
+    state.supporterGoals.find((goal) => goal.id === id)
+  );
 
   const [shouldShow, setShouldShow] = useState(false);
   const [text, onChangeText] = useState(goal.goal_description);
@@ -21,7 +23,7 @@ function SupportGoalDetailScreen(props) {
 
   const handleSendSupport = (message) => {
     console.log(message);
-    postMessage(user.id, message);
+    postMessage(user.auth_token, message);
   };
 
   return (

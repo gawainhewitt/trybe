@@ -12,11 +12,10 @@ function ViewSupporterGoals(props) {
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
   let supporterGoals = useSelector((state) => state.supporterGoals);
-  
 
   useEffect(() => {
     async function load() {
-      await dispatch(supporterLoadGoals(user.id));
+      await dispatch(supporterLoadGoals(user.auth_token));
       setLoading(false);
     }
     load();

@@ -15,7 +15,7 @@ function ViewGoals(props) {
 
   useEffect(() => {
     async function load() {
-      await dispatch(loadGoals(user.id));
+      await dispatch(loadGoals(user.auth_token));
       setLoading(false);
     }
     load();
@@ -37,13 +37,11 @@ function ViewGoals(props) {
             <Card style={styles.cardStyle} onPress={() => clickedItem(item.id)}>
               <Card.Content>
                 <Text>{item.goal_description}</Text>
-                <ProgressBar progress={item.progress}/>
+                <ProgressBar progress={parseFloat(item.progress)} />
               </Card.Content>
             </Card>
           )}
-          ListFooterComponent={() => (
-            <View style={{padding: 70}}></View>
-      )}
+          ListFooterComponent={() => <View style={{ padding: 70 }}></View>}
         />
       )}
     </View>

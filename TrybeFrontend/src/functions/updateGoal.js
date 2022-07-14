@@ -2,19 +2,17 @@ import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 
 async function updateGoal(token, id, goal_description, progress) {
-  console.log(progress);
-  // const url = `https://trybe-backend.herokuapp.com/goals/${id}/`;
-  const url = `${BACKEND_URL}/Goals?access_token=${token}`;
+  const url = `${BACKEND_URL}/goals/${id}/`;
 
   const data = {
     goal_description: goal_description,
-    id: id,
     progress: progress,
   };
   const response = await fetch(url, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Token ${token}`,
     },
     body: JSON.stringify(data),
   });

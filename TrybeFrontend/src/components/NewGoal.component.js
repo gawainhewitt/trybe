@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Keyboard, View} from "react-native";
+import { Keyboard, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import styles from "./NewGoal.component.style";
 import { uploadGoal } from "../../store/goals/goals.actions";
@@ -14,14 +14,14 @@ function NewGoal() {
   const dispatch = useDispatch();
 
   const handleUploadGoal = () => {
-    if(text != "") {
-      dispatch(uploadGoal({ token: user.id, text: text }));
+    if (text != "") {
+      dispatch(uploadGoal({ token: user.auth_token, text: text }));
       onChangeText("");
       Keyboard.dismiss();
-    }else{
+    } else {
       createAlert("Invalid Input!", "No goal specified");
     }
-  }
+  };
 
   return (
     <View style={styles.wrapper}>

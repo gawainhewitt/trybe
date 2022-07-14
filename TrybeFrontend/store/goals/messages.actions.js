@@ -3,9 +3,10 @@ import fetchMessages from "../../src/functions/fetchMessages";
 
 export const loadMessages = createAsyncThunk(
   "messages/loadMessages",
-  async (token, thunkAPI) => {
+  async ({ token, id }, thunkAPI) => {
     try {
-      const response = await fetchMessages(token);
+      console.log("redux action id", id);
+      const response = await fetchMessages(token, id);
       return response;
     } catch (err) {
       throw err;

@@ -1,9 +1,9 @@
 import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 
-async function postMessage(token, id, text) {
-  const url = `${BACKEND_URL}/goals/${id}/messages/`;
-  const data = { message: text };
+async function connectSupporter(token, email, id) {
+  const url = `${BACKEND_URL}/supporters/connect/`;
+  const data = { supporter_email: email, supporter_id: id };
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
@@ -13,10 +13,9 @@ async function postMessage(token, id, text) {
     },
     body: JSON.stringify(data),
   });
-
   const responseData = await response.json();
   console.log(responseData);
-  return responseData;
+  return response.json();
 }
 
-export default postMessage;
+export default connectSupporter;

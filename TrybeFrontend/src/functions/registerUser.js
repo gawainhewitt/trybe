@@ -1,6 +1,7 @@
 import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 import loginUser from "./loginUser";
+import connectSupporter from "./connectSupporter";
 
 const registerUser = async (email, username, password) => {
   const url = `${BACKEND_URL}/auth/users/`;
@@ -14,15 +15,13 @@ const registerUser = async (email, username, password) => {
         password: password,
       }),
     });
-    const test = await response.json();
-    console.log("register", test);
-    if (response.ok) {
-      console.log("register success");
-      const data = await loginUser(username, password);
-      console.log("login", data);
 
-      // const data = await response.json();
-      return data;
+    const data = await response.json();
+
+    if (response.ok) {
+      const token = await loginUser(username, password);
+      connectSupporter(token.auth_token, data.email, data.id);
+      return token;
     }
     throw new Error("Request failed");
   } catch (error) {

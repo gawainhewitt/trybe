@@ -23,7 +23,9 @@ function SupportGoalDetailScreen(props) {
 
   const handleSendSupport = (message) => {
     console.log(message);
-    postMessage(user.auth_token, message);
+    postMessage(user.auth_token, goal.id, message);
+    setMessage(null);
+    Keyboard.dismiss();
   };
 
   return (

@@ -20,6 +20,7 @@ import { AuthContext } from "../context/AuthContext";
 import { createAlert } from "../functions/createAlert";
 
 import emailSupporter from "../functions/emailSupporter";
+import inviteSupporter from "../functions/connectSupporter";
 import { loadMessages } from "../../store/goals/messages.actions";
 
 function GoalDetailScreen(props) {
@@ -35,7 +36,8 @@ function GoalDetailScreen(props) {
 
   useEffect(() => {
     function load() {
-      dispatch(loadMessages(user.auth_token));
+      console.log("id", id);
+      dispatch(loadMessages({ token: user.auth_token, id: id }));
     }
     load();
   }, [dispatch]);
@@ -59,7 +61,8 @@ function GoalDetailScreen(props) {
 
   const handleSubmitSupporter = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      emailSupporter(email, goal);
+      emailSupporter(email, gmoal);
+      inviteSupporter(user.auth_token, email, goal.id);
       setEmail(null);
       Keyboard.dismiss();
     } else {

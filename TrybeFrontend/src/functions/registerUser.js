@@ -2,7 +2,7 @@ import getEnvVars from "../../environment";
 const { BACKEND_URL } = getEnvVars();
 import loginUser from "./loginUser";
 
-const registerUser = async (email, password) => {
+const registerUser = async (email, username, password) => {
   const url = `${BACKEND_URL}/auth/users/`;
   try {
     const response = await fetch(url, {
@@ -10,15 +10,16 @@ const registerUser = async (email, password) => {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        username: "luke123test",
+        username: username,
         password: password,
       }),
     });
     const test = await response.json();
-    console.log(test);
+    console.log("register", test);
     if (response.ok) {
-      const data = await loginUser(email, password);
-      console.log(data);
+      console.log("register success");
+      const data = await loginUser(username, password);
+      console.log("login", data);
 
       // const data = await response.json();
       return data;

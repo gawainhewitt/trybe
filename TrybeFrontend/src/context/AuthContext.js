@@ -3,27 +3,28 @@ import React, { createContext, useEffect, useState } from "react";
 
 import registerUser from "../functions/registerUser";
 import loginUser from "../functions/loginUser";
-import logoutUser from "../functions/logoutUser";
+// import logoutUser from "../functions/logoutUser";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUserInfo] = useState({});
 
-  const register = async (email, password) => {
-    const user = await registerUser(email, password);
+  const register = async (email, username, password) => {
+    const user = await registerUser(email, username, password);
     setUserInfo(user);
     AsyncStorage.setItem("user", JSON.stringify(user));
   };
 
-  const login = async (email, password) => {
-    const user = await loginUser(email, password);
+  const login = async (username, password) => {
+    const user = await loginUser(username, password);
     setUserInfo(user);
     AsyncStorage.mergeItem("user", JSON.stringify(user));
   };
 
   const logout = async () => {
-    // await logoutUser(token);
+    console.log("logging out");
+    // await logoutUser(user);
     AsyncStorage.removeItem("user");
     setUserInfo({});
   };

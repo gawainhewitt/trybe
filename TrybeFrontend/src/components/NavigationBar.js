@@ -4,8 +4,7 @@ import { StyleSheet } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 
 function NavigationBar({ navigation, back }) {
-  const { user } = useContext(AuthContext);
-  const { logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <Appbar.Header style={styles.header}>

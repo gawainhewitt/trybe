@@ -8,19 +8,19 @@ import Logo from "../components/Logo";
 import { createAlert } from "../functions/createAlert";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState(null);
+  const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const { login } = useContext(AuthContext);
 
   const handleLogin = () => {
-    if(email === null){
+    if (username === null) {
       createAlert("Error!", "email field cannot be empty");
-    }else if(password === null){
+    } else if (password === null) {
       createAlert("Error!", "password field cannot be empty");
-    }else{
-      login(email, password);
+    } else {
+      login(username, password);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -28,9 +28,9 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
-          value={email}
-          placeholder="Enter email"
-          onChangeText={(text) => setEmail(text)}
+          value={username}
+          placeholder="Enter username"
+          onChangeText={(text) => setUsername(text)}
         />
 
         <TextInput

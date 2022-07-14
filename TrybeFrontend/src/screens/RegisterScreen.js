@@ -7,20 +7,23 @@ import { createAlert } from "../functions/createAlert";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
+  const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
   const { register } = useContext(AuthContext);
 
   const handleRegister = () => {
-    if(email === null){
+    if (email === null) {
       createAlert("Error!", "email field cannot be empty");
-    }else if(password === null){
+    } else if (password === null) {
       createAlert("Error!", "password field cannot be empty");
-    }else{
-      register(email, password);
-      navigation.navigate("Login");
+    } else if (username === null) {
+      createAlert("Error!", "username field cannot be empty");
+    } else {
+      register(email, username, password);
+      // navigation.navigate("Login");
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -31,6 +34,13 @@ const RegisterScreen = ({ navigation }) => {
           value={email}
           placeholder="Enter email"
           onChangeText={(text) => setEmail(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          value={username}
+          placeholder="Enter username"
+          onChangeText={(text) => setUsername(text)}
         />
 
         <TextInput
@@ -55,7 +65,7 @@ const RegisterScreen = ({ navigation }) => {
           <Text>Already have an account? </Text>
           <Button
             icon="account-circle"
-            onPress={() => navigation.navigate("Login")}
+            // onPress={() => navigation.navigate("Login")}
           >
             Login
           </Button>
